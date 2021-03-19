@@ -1,0 +1,16 @@
+<%= form_with(model: [collection, review], local: true) do |f| %>
+<div id='star'>
+  <label>Rate this collection!</label>
+</div>
+<%= f.submit "Submit", style: 'max-width: 100px'%>
+<% end %>
+
+<script>
+  $('#star').raty({
+  // readOnly: true,
+  // half: true,
+  hints: false,
+  path: '/assets/',
+  scoreName: 'review[rate]'
+});
+</script>

@@ -1,0 +1,18 @@
+<div class='container my-5'>
+<h1>Current user</h1>
+  <ul>
+    <li>Name: <%= current_user.name %></li>
+    <li>Phone: <%= current_user.phone %></li>
+    <li>Email: <%= current_user.email %></li>
+  </ul>
+
+<h3>Current user collections</h3>
+<ul>
+  <% current_user.collections.each do |collection| %>
+    <li><%= link_to collection.title, collection %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Edit account', users_edit_path, class: 'btn btn-outline-danger my-2' %>
+</div>
+

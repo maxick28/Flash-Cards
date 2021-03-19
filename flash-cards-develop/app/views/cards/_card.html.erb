@@ -1,0 +1,10 @@
+<div class="container" id="card-container">
+  <div class="row justify-content-md-center">
+    <div class="card text-center flipCard" style="width: 18rem; height: 20rem; border: 10px solid transparent;">
+      <div class="card" id="card" onclick="this.classList.toggle('flipped');">
+        <h2 class="side front" id="front"><%= card.front %></h2>
+        <p class="side back" id="back"><%= card.back %></p>
+      </div>
+    </div>
+  </div>
+</div>

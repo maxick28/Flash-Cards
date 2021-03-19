@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FlashCards</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+  </head>
+
+  <body>
+    <%= render 'layouts/header' %>
+
+    <%= render 'layouts/breadcrumbs' %>
+
+    <% if notice %>
+      <div aria-live="polite" aria-atomic="true" class="position-relative" >
+        <div class="toast-container position-absolute p-3" style="width: 300px; top: 0; left: 0;">
+          <div class="toast" data-delay="3000">
+            <div class="toast-header">
+              <strong class="mr-auto text-primary">Notification</strong>
+              <small class="text-muted">Just now</small>
+              <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+            </div>
+            <div class="toast-body">
+              <%= notice %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Popper.js first, then Bootstrap JS -->
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+      <%= javascript_pack_tag 'toast' %>
+    <% end %>
+
+    <% if alert %>
+      <p class='alert'><%= alert %></p>
+    <% end %>
+
+    <div class = 'content'>
+      <%= yield %>
+    </div>
+
+    <% if false %>
+      <%= render 'layouts/footer' %>
+    <% end %>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

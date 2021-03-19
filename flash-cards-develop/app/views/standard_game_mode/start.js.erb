@@ -1,0 +1,20 @@
+function startGame() {
+  document.getElementsByClassName("col")[0].parentNode.remove();
+
+  const skipButton = document.getElementById("skip-card-button");
+  skipButton.action = "<%= raw(standard_game_mode_next_card_url({ collection_id: @collection.id, offset: @offset, game_id: @game_id, skipped_card: @current_card.id })) %>"
+  skipButton.style.display = "block"
+
+  const nextButton = document.getElementById("next-card-button");
+  nextButton.action = "<%= raw(standard_game_mode_next_card_url({ collection_id: @collection.id, offset: @offset, game_id: @game_id, skipped_card: nil })) %>";
+  nextButton.style.display = "block"
+
+  const cardContainer = document.getElementById('card-container');
+  cardContainer.style.removeProperty("filter");
+}
+
+startGame();
+
+window.onbeforeunload = function() {
+  return 'Are you sure you want to leave?';
+};

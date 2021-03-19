@@ -1,0 +1,43 @@
+function checkCardState() {
+  const card = document.getElementById("card");
+  if (card.classList.contains('flipped')) {
+    card.classList.remove('flipped');
+    window.setTimeout(changeCard, 200);
+  } else {
+    changeCard();
+  }
+}
+
+function stopTimerAndRemoveButtons() {
+    clearTimeout(window.t);
+
+    document.getElementsByClassName("col")[1].parentNode.remove();
+}
+
+function changeCard() {
+  <% if @current_card %>
+    const front = document.getElementById("front");
+    front.innerHTML = "<%= @current_card.front %>";
+
+    const back = document.getElementById("back");
+    back.innerHTML = "<%= @current_card.back %>";
+
+    const skipButton = document.getElementById("skip-card-button");
+    skipButton.action = "<%= raw(standard_game_mode_next_card_url({ collection_id: @collection.id, offset: @offset, game_id: @game_id, skipped_card: @current_card.id })) %>";
+
+    const nextButton = document.getElementById("next-card-button");
+    nextButton.action = "<%= raw(standard_game_mode_next_card_url({ collection_id: @collection.id, offset: @offset, game_id: @game_id, skipped_card: nil  })) %>";
+  <% else %>
+    stopTimerAndRemoveButtons();
+
+    const totallCardsAmount = <%= @totall_cards_amount %>;
+    const skippedCardsAmount = <%= @skipped_cards_amount %>;
+    let message = `Your score: ${totallCardsAmount - skippedCardsAmount}/${totallCardsAmount}\n`;
+    message += `Elapsed time: ${document.getElementById('stopwatch').textContent}`;
+    alert(message);
+
+    document.getElementsByClassName("col")[0].parentNode.hidden = false
+  <% end %>
+}
+
+checkCardState();

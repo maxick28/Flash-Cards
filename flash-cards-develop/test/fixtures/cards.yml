@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+hello:
+  front: Hello
+  back: Привіт
+  collection: other
+
+goodbye:
+  front: Goodbye
+  back: До побачення
+  collection: other

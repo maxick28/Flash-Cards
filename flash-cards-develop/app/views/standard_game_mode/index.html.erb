@@ -1,0 +1,70 @@
+<% if notice %>
+  <aside id="notice"><%= notice %></aside>
+<% end %>
+
+<br>
+
+<div class="container">
+  <div class="row justify-content-md-center text-center">
+  <span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+      <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
+      <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
+    </svg>
+    <h2 id="stopwatch" style="margin-bottom: 0;"><time>00:00</time></h2>
+  </span>
+  </div>
+</div>
+
+<%= render 'cards/card', card: @card %>
+
+<div class="container" id="buttons-container">
+  <div class="row justify-content-md-center text-center">
+    <div class="col col-sm-2">
+      <%= button_to "Start",
+          standard_game_mode_start_path({ collection_id: @collection.id }),
+          remote: true,
+          method: :post,
+          form: { id: "start-game-button" },
+          class: "btn btn-warning btn-lg btn-block" %>
+    </div>
+  </div>
+  <div class="row justify-content-md-center text-center">
+    <div class="col col-sm-2">
+      <%= button_to "I don't know",
+          standard_game_mode_next_card_path(),
+          remote: true,
+          method: :post,
+          form: { id: "skip-card-button" },
+          class: "btn btn-danger btn-lg btn-block" %>
+    </div>
+    <div class="col col-sm-2">
+      <%= button_to "I know",
+          standard_game_mode_next_card_path(),
+          remote: true,
+          method: :post,
+          form: { id: "next-card-button" },
+          class: "btn btn-success btn-lg btn-block" %>
+    </div>
+  </div>
+  <div class="row justify-content-md-center text-center" hidden="true">
+    <div class="col col-sm-2">
+      <%= link_to 'Retry', standard_game_mode_index_path({ collection_id: @collection.id }), class: 'btn btn-primary btn-lg btn-block' %>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("turbolinks:load", function() {
+    const cardContainer = document.getElementById('card-container');
+    cardContainer.style.filter = "blur(5px)";
+
+    const skipButton = document.getElementById("skip-card-button");
+    skipButton.style.display = "none"
+
+    const nextButton = document.getElementById("next-card-button");
+    nextButton.style.display = "none"
+  })
+</script>
+
+<%= javascript_pack_tag 'stopwatch' %>

@@ -1,0 +1,13 @@
+<h1 class='text-center text-white display-4 font-weight-bold my-5'>Choose a category</h1>
+<div class='row row-cols-1 row-cols-md-2 g-4'>
+  <% categories.each do |category| %>
+    <div class="col">
+    <div class="card my-3 text-center">
+      <div class="card-body">
+        <h4 class="card-title font-weight-bold "><%= category.name %></h4>
+          <%= link_to 'View', collections_my_filter_path({category_id: category.id}), class: 'btn btn-dark' %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

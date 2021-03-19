@@ -1,0 +1,59 @@
+<% if notice %>
+  <aside id="notice"><%= notice %></aside>
+<% end %>
+
+<br>
+
+<h1 style="text-align: center;">Choose category:</h1>
+
+<div class="container">
+  <% @categories.each_slice(2) do |three_categories| %>
+    <div class="row">
+      <% three_categories.each do |category| %>
+        <div class="col-sm">
+          <div class="flipCard">
+            <a href=<%= standard_game_mode_index_path({ category: category }) %>>
+              <div class="card">
+                <div class="side front" style="background-color: <%= @colors_enumerator.next %>">
+                  <%= category %>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="container" id="searchDiv">
+  <input type="text" id="myInput" placeholder="Search for cards.." />
+  <table class="table caption-top" id="myTable">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Front</th>
+        <th scope="col">Back</th>
+        <th scope="col">Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cards.each do |card| %>
+        <tr>
+          <th scope="row">
+            <a href=<%= card_path(card) %>><%= card.id %></a>
+          </th>
+          <td><%= card.front %></td>
+          <td><%= card.back %></td>
+          <td><%= card.category %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= javascript_pack_tag 'card' %>
+<% if false %>
+  <%# add jsx (React) file to view  %>
+  <%= javascript_pack_tag("search_cart") %>
+<% end %>
